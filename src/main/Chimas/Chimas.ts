@@ -13,7 +13,8 @@ export default class Chimas {
       [Actions.leave]: this.leave,
       [Actions.next]: this.next,
       [Actions.who]: this.who,
-      [Actions.clear]: this.clear
+      [Actions.clear]: this.clear,
+      [Actions.help]: this.help
     }
   }
 
@@ -91,6 +92,12 @@ export default class Chimas {
     }
     return message;
   }
+
+  private help(): string {
+    return "ChimaQueue:\n" +
+      "For usage help, access: https://github.com/danielbertolozi/chimaqueue.\n" +
+      "Available Commands: new, join, leave, next, who, clear.";
+  }
 }
 
 enum Actions {
@@ -99,5 +106,6 @@ enum Actions {
   leave = "leave",
   next = "next",
   who = "who",
-  clear = "clear"
+  clear = "clear",
+  help = "help"
 }
