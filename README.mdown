@@ -1,5 +1,14 @@
 # Chimaqueue
 
+A Slack-Bot in Typescript to manage chimarrão queue.
+
+## Commands
+
+|---------|---------|
+| Command | 
+
+
+
 Using:
 
 * openode
@@ -9,3 +18,8 @@ Using:
 ### Commands
 
 `openode deploy`: Deploys to the net
+
+### Todos
+
+* Make it receive requests in a single end-point, and handle them using text.
+> E.g. instead of using `/join`, use `/chimas join`, for example
