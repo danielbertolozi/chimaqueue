@@ -91,9 +91,10 @@ server.get("/clear", async (req, reply) => {
 
 const start = async () => {
   try {
-    await server.listen(80);
-    const port = (server.server.address() as AddressInfo).port;
-    server.log.info(`server listening on ${port}`);
+    const port = process.env.PORT || "80";
+    await server.listen(port);
+    const realPort = (server.server.address() as AddressInfo).port;
+    server.log.info(`server listening on ${realPort}`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);
