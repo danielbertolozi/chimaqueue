@@ -93,6 +93,11 @@ server.post("/clear", async (req, reply) => {
   reply.send(`The queue has been cleared!`);
 });
 
+server.post("/test", async (req, reply) => {
+  const payload = new Payload(req.body) as SlackPayload;
+  reply.send(payload);
+});
+
 const start = async () => {
   try {
     const parsed = parseInt(process.env.PORT);
