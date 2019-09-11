@@ -37,7 +37,7 @@ server.post("/join", async (req, reply) => {
     reply.code(200);
     reply.send(e.message);
   }
-  reply.send(`${name} has joined the queue!`);
+  reply.send(`${user} has joined the queue!`);
 });
 
 server.post("/leave", async (req, reply) => {
