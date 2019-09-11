@@ -18,6 +18,7 @@
     "fastify": "^2.8.0",
     "mocha": "^6.2.0",
     "openode": "^2.0.14",
+    "slack-payload": "^1.0.11",
     "typescript": "^3.6.3"
   }
 }
