@@ -15,7 +15,10 @@ server.post("/", async (request, reply) => {
   const payload = new Payload(request.body) as SlackPayload;
   const action = SlackParser.identifyAction(payload.command);
   const response = chimas.execute(action, payload);
-  reply.send(response);
+  reply.send({
+    response_type: "in_channel",
+    text: response
+  });
 });
 
 server.post("/test", async (req, reply) => {
