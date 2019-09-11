@@ -76,7 +76,11 @@ export default class Chimas {
     let message: string;
     try {
       const user = this.queues.get(channelName).whosWithIt();
-      message = `*${user}* is with the chimarrão. :chimas:`;
+      if (user) {
+        message = `*${user}* is with the chimarrão. :chimas:`;
+      } else {
+        message = "The queue hasn't started yet. Use `new` and/or `join to start it!`";
+      }
     } catch (e) {
       message = e.message;
     }
