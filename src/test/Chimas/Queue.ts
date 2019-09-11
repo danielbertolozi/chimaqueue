@@ -19,7 +19,7 @@ context("Queue", () => {
     });
     it("should throw if person already is in queue", () => {
       queue.add("joao");
-      expect(queue.add("joao")).to.throw();
+      expect(() => queue.add("joao")).to.throw();
     });
   });
   describe("when calling function remove", () => {
@@ -30,7 +30,7 @@ context("Queue", () => {
       expect(queue.getGuestList()).to.have.length(0);
     });
     it("should throw if person doesn't exist", () => {
-      expect(queue.remove("joao")).to.throw();
+      expect(() => queue.remove("joao")).to.throw();
     });
   });
 });
