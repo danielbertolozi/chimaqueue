@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
 	"tsc": "./node_modules/.bin/tsc",
-	"start": "./built/PLACEHOLDER"
+	"start": "node ./built/StartingPoint.js"
   },
   "author": "",
   "license": "ISC",
