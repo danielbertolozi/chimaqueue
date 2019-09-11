@@ -4,7 +4,6 @@ A Slack-Bot in Typescript to manage chimarrão queue, made using Fastify, ready 
 
 ## Commands
 
-|---------|---------|
 | Command | What?   |
 |---------|---------|
 | `new` | Starts a queue in the actual channel. |
@@ -13,7 +12,6 @@ A Slack-Bot in Typescript to manage chimarrão queue, made using Fastify, ready 
 | `next` | See who's next in line (this is where you pass the cuia around). |
 | `who` | See who's in this queue. |
 | `clear` | Clears the queue. |
-|---------|-------------------|
 
 ## Development
 
