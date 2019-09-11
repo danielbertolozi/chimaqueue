@@ -8,13 +8,13 @@ export default class Chimas {
   constructor() {
     this.queues = new QueueHolder();
     this.actionsMap = {
-      [Actions.new]: this.newQueue,
-      [Actions.join]: this.join,
-      [Actions.leave]: this.leave,
-      [Actions.next]: this.next,
-      [Actions.who]: this.who,
-      [Actions.clear]: this.clear,
-      [Actions.help]: this.help
+      [Actions.new]: this.newQueue.bind(this),
+      [Actions.join]: this.join.bind(this),
+      [Actions.leave]: this.leave.bind(this),
+      [Actions.next]: this.next.bind(this),
+      [Actions.who]: this.who.bind(this),
+      [Actions.clear]: this.clear.bind(this),
+      [Actions.help]: this.help.bind(this)
     }
   }
 
