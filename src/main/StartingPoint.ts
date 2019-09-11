@@ -17,7 +17,8 @@ server.post("/new", async (req, reply) => {
     server.log.error(e);
     reply.code(400);
   }
-  reply.send(`Queue started for channel ${name}`);
+  reply.type("application/json");
+  reply.send({ text: `Queue started for channel ${name}`});
 });
 
 server.get("/join", async (req, reply) => {
