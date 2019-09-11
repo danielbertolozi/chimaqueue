@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import QueueHolder from "../../main/chimas/QueueHolder";
+import QueueHolder from "../../main/chimas/ChimasServer";
 import Queue from "../../main/chimas/Queue";
 
 let holder: QueueHolder;
