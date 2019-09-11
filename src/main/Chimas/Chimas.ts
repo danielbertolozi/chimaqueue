@@ -31,7 +31,7 @@ export default class Chimas {
     let message: string;
     try {
       this.queues.get(channelName).add(userName);
-      message = `${userName} has joined the queue!`;
+      message = `*${userName}* has joined the queue!`;
     } catch (e) {
       message = e.message;
     }
@@ -42,7 +42,7 @@ export default class Chimas {
     let message: string;
     try {
       this.queues.create(channelName);
-      message = `Queue started for channel ${channelName}`;
+      message = `Queue started for channel ${channelName}! Prepare the chimas :chimas:`;
     } catch (e) {
       message = e.message;
     }
@@ -64,7 +64,7 @@ export default class Chimas {
     let message: string;
     try {
       const next = this.queues.get(channelName).whosNext();
-      message = `The next in queue is ${next}.`;
+      message = `The next in queue is *${next}*.`;
     } catch (e) {
       message = e.message;
     }
@@ -94,9 +94,9 @@ export default class Chimas {
   }
 
   private help(): string {
-    return "ChimaQueue:\n" +
+    return "*ChimaQueue*\n" +
       "For usage help, access: https://github.com/danielbertolozi/chimaqueue.\n" +
-      "Available Commands: new, join, leave, next, who, clear.";
+      "Available Commands: `new, join, leave, next, who, clear.`";
   }
 }
 
