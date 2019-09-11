@@ -6,7 +6,8 @@
     "inlineSourceMap": true,
     "declaration": false,
     "noImplicitAny": false,
-    "outDir": "built"
+    "outDir": "built",
+	"rootDir": "./src"
   },
   "exclude": [
     "built",
