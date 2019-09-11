@@ -32,7 +32,7 @@ export default class Chimas {
     let message: string;
     try {
       this.queues.get(channelName).add(userName);
-      message = `*@${userName}* has joined the queue!`;
+      message = `${userName} has joined the queue!`;
     } catch (e) {
       message = e.message;
     }
@@ -54,7 +54,7 @@ export default class Chimas {
     let message: string;
     try {
       this.queues.get(name).remove(userName);
-      message = `User *@${userName}* has left the queue.`;
+      message = `User ${userName} has left the queue.`;
     } catch (e) {
       message = e.message;
     }
@@ -65,7 +65,7 @@ export default class Chimas {
     let message: string;
     try {
       const next = this.queues.get(channelName).whosNext();
-      message = `The next in queue is *@${next}*. :chimas:`;
+      message = `The next in queue is ${next}. :chimas:`;
     } catch (e) {
       message = e.message;
     }
@@ -77,7 +77,7 @@ export default class Chimas {
     try {
       const user = this.queues.get(channelName).whosWithIt();
       if (user) {
-        message = `*@${user}* is with the chimarrão. :chimas:`;
+        message = `${user} is with the chimarrão. :chimas:`;
       } else {
         message = "The queue hasn't started yet. Use `new` and/or `join to start it!`";
       }
@@ -109,7 +109,7 @@ export default class Chimas {
     try {
       const usersInQueue = this.queues.get(channelName).getGuestList();
       if (usersInQueue.length > 0) {
-        message = `The following users are in this queue, in this order: *@${usersInQueue.join(", ")}*.`;
+        message = `The following users are in this queue, in this order: ${usersInQueue.join(", ")}.`;
       } else {
         message = "Nobody is in the queue right now. *Want to be the first?* Type `/join`!";
       }
