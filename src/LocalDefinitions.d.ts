@@ -5,5 +5,6 @@ export interface SlackPayload {
   user_id: string;
   bot_id: string;
   channel_name: string;
+  command: string;
   user_name: string;
 }
