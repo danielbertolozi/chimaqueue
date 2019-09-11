@@ -3,6 +3,7 @@ FROM node:10-alpine
 WORKDIR /opt/app
 
 ENV PORT=80
+ENV DOCKER=1
 
 RUN echo 'set -e' >> /boot.sh
 

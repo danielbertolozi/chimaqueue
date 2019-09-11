@@ -108,7 +108,8 @@ const start = async () => {
   try {
     const parsed = parseInt(process.env.PORT);
     const port = parsed === 0 ? 80 : parsed;
-    await server.listen(port, "0.0.0.0");
+    const address = process.env.DOCKER ? "0.0.0.0" : "127.0.0.1";
+    await server.listen(port, address);
     const realPort = (server.server.address() as AddressInfo).port;
     server.log.info(`server listening on ${realPort}`);
   } catch (err) {
