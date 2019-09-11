@@ -10,7 +10,8 @@ A Slack-Bot in Typescript to manage chimarrão queue, made using Fastify, ready 
 | `join` | Enters a queue from the actual channel. |
 | `leave` | Leaves a queue from the actual channel. |
 | `next` | See who's next in line (this is where you pass the cuia around). |
-| `who` | See who's in this queue. |
+| `who` | See who's with the chimarrão. |
+| `members` | See who's in this queue, in order. |
 | `clear` | Clears the queue. |
 
 ## Development

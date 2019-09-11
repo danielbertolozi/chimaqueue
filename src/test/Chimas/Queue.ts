@@ -40,6 +40,15 @@ context("Queue", () => {
       expect(queue.getGuestList()).to.have.length(2);
       queue.clear();
       expect(queue.getGuestList()).to.have.length(0);
+      expect(queue.whosWithIt()).to.be.empty;
+      expect(queue.whosNext()).to.be.empty;
+    });
+  });
+  describe("when calling function whosWithIt", () => {
+    it("Should return the username of the actual user", () => {
+      queue.add("joao");
+      queue.whosNext();
+      expect(queue.whosWithIt()).to.be.equal("joao");
     });
   });
   describe("when calling function whosNext", () => {

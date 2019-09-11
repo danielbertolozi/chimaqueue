@@ -1,6 +1,7 @@
 export default class Queue {
 	private guests: string[] = [];
 	private generator: IterableIterator<string>;
+	private current: string;
 
 	constructor(private readonly name: string) {
 		this.generator = this.setupGenerator();
@@ -25,11 +26,16 @@ export default class Queue {
 	}
 
 	public whosNext() {
-		return this.generator.next().value;
+		return this.current = this.generator.next().value;
+	}
+
+	public whosWithIt() {
+		return this.current;
 	}
 
 	public clear() {
 		this.guests = [];
+		this.current = "";
 	}
 
 	private isPersonInQueue(name: string) {
@@ -38,6 +44,9 @@ export default class Queue {
 
 	private* setupGenerator() {
 		while (true) {
+			if (this.guests.length === 0) {
+				yield "";
+			}
 			for (const person of this.guests) {
 				yield person;
 			}

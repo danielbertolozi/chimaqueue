@@ -14,7 +14,8 @@ export default class Chimas {
       [Actions.next]: this.next.bind(this),
       [Actions.who]: this.who.bind(this),
       [Actions.clear]: this.clear.bind(this),
-      [Actions.help]: this.help.bind(this)
+      [Actions.help]: this.help.bind(this),
+      [Actions.members]: this.showMembers.bind(this)
     }
   }
 
@@ -53,7 +54,7 @@ export default class Chimas {
     let message: string;
     try {
       this.queues.get(name).remove(userName);
-      message = `User ${userName} has left the queue.`;
+      message = `User *${userName}* has left the queue.`;
     } catch (e) {
       message = e.message;
     }
@@ -64,7 +65,7 @@ export default class Chimas {
     let message: string;
     try {
       const next = this.queues.get(channelName).whosNext();
-      message = `The next in queue is *${next}*.`;
+      message = `The next in queue is *${next}*. :chimas:`;
     } catch (e) {
       message = e.message;
     }
@@ -74,8 +75,8 @@ export default class Chimas {
   private who(channelName: string): string {
     let message: string;
     try {
-      const usersInQueue = this.queues.get(channelName).getGuestList().join(", ");
-      message = `The following users are in this queue, in this order: ${usersInQueue}.`;
+      const user = this.queues.get(channelName).whosWithIt();
+      message = `*${user}* is with the chimarrão. :chimas:`;
     } catch (e) {
       message = e.message;
     }
@@ -98,6 +99,21 @@ export default class Chimas {
       "For usage help, access: https://github.com/danielbertolozi/chimaqueue.\n" +
       "Available Commands: `new, join, leave, next, who, clear.`";
   }
+
+  private showMembers(channelName: string): string {
+    let message: string;
+    try {
+      const usersInQueue = this.queues.get(channelName).getGuestList();
+      if (usersInQueue.length > 0) {
+        message = `The following users are in this queue, in this order: *${usersInQueue.join(", ")}*.`;
+      } else {
+        message = "Nobody is in the queue right now. *Want to be the first?* Type `/join`!";
+      }
+    } catch (e) {
+      message = e.message;
+    }
+    return message;
+  }
 }
 
 enum Actions {
@@ -106,6 +122,7 @@ enum Actions {
   leave = "leave",
   next = "next",
   who = "who",
+  members = "members",
   clear = "clear",
   help = "help"
 }
