@@ -18,4 +18,9 @@ context("Queue Holder", () => {
       expect(() => holder.create(name)).to.throw();
     });
   });
+  describe("when calling function get", () => {
+    it("should throw if name doesn't exists", () => {
+      expect(() => holder.get("something")).to.throw();
+    });
+  });
 });
