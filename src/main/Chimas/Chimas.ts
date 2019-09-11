@@ -75,7 +75,7 @@ export default class Chimas {
     let message: string;
     try {
       const usersInQueue = this.queues.get(channelName).getGuestList().join(", ");
-      message = `The following users are in this queue: ${usersInQueue}.`;
+      message = `The following users are in this queue, in this order: ${usersInQueue}.`;
     } catch (e) {
       message = e.message;
     }
