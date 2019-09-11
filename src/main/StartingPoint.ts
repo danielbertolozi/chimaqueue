@@ -3,7 +3,6 @@ import * as Payload from "slack-payload";
 import { AddressInfo } from "net";
 import { SlackPayload } from "../LocalDefinitions";
 import * as fastifyFormBody from "fastify-formbody";
-import SlackParser from "./slack/SlackParser";
 import Chimas from "./chimas/Chimas";
 const server = Fastify({ logger: true });
 
@@ -13,7 +12,7 @@ const chimas = new Chimas();
 
 server.post("/", async (request, reply) => {
   const payload = new Payload(request.body) as SlackPayload;
-  const action = SlackParser.identifyAction(payload.command);
+  const action = payload.text;
   const response = chimas.execute(action, payload);
   reply.send({
     response_type: "in_channel",
@@ -37,6 +36,7 @@ const start = async () => {
     const realPort = (server.server.address() as AddressInfo).port;
     server.log.info(`server listening on ${realPort}`);
   } catch (err) {
+    console.log(err);
     process.exit(1);
   }
 }
