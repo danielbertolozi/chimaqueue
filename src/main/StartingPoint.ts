@@ -1,95 +1,21 @@
 import * as Fastify from "fastify";
 import * as Payload from "slack-payload";
 import { AddressInfo } from "net";
-import QueueHolder from "./chimas/QueueHolder";
 import { SlackPayload } from "../LocalDefinitions";
 import * as fastifyFormBody from "fastify-formbody";
+import SlackParser from "./slack/SlackParser";
+import Chimas from "./chimas/Chimas";
 const server = Fastify({ logger: true });
 
 server.register(fastifyFormBody);
 
-const queues = new QueueHolder();
+const chimas = new Chimas();
 
-server.post("/new", async (req, reply) => {
-  let message: string;
-  const payload = new Payload(req.body) as SlackPayload;
-  const name = payload.channel_name;
-  try {
-    queues.create(name);
-    message = `Queue started for channel ${name}`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
-});
-
-server.post("/join", async (req, reply) => {
-  const payload = new Payload(req.body) as SlackPayload;
-  let message;
-  const name = payload.channel_name;
-  const user = payload.user_name;
-  try {
-    queues.get(name).add(user);
-    message = `${user} has joined the queue!`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
-});
-
-server.post("/leave", async (req, reply) => {
-  const payload = new Payload(req.body) as SlackPayload;
-  const name = payload.channel_name;
-  const user = payload.user_name;
-  let message: string;
-  try {
-    queues.get(name).remove(user);
-    message = `User ${user} has left the queue.`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
-});
-
-server.post("/next", async (req, reply) => {
-  const payload = new Payload(req.body) as SlackPayload;
-  const name = payload.channel_name;
-  let next: string = "";
-  let message: string;
-  try {
-    next = queues.get(name).whosNext();
-    message = `The next in queue is ${next}.`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
-});
-
-server.post("/who", async (req, reply) => {
-  const payload = new Payload(req.body) as SlackPayload;
-  const name = payload.channel_name;
-  let usersInQueue: string;
-  let message: string;
-  try {
-    usersInQueue = queues.get(name).getGuestList().join(", ");
-    message = `The following users are in this queue: ${usersInQueue}.`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
-});
-
-server.post("/clear", async (req, reply) => {
-  const payload = new Payload(req.body) as SlackPayload;
-  const name = payload.channel_name;
-  let message: string;
-  try {
-    queues.get(name).clear();
-    message = `The queue has been cleared!`;
-  } catch (e) {
-    message = e.message;
-  }
-  reply.send(message);
+server.post("/", async (request, reply) => {
+  const payload = new Payload(request.body) as SlackPayload;
+  const action = SlackParser.identifyAction(payload.command);
+  const response = chimas.execute(action, payload);
+  reply.send(response);
 });
 
 server.post("/test", async (req, reply) => {
