@@ -28,6 +28,10 @@ export default class Queue {
 		return this.generator.next().value;
 	}
 
+	public clear() {
+		this.guests = [];
+	}
+
 	private isPersonInQueue(name: string) {
 		return this.guests.find((g) => g === name);
 	}

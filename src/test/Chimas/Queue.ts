@@ -33,13 +33,20 @@ context("Queue", () => {
       expect(() => queue.remove("joao")).to.throw();
     });
   });
+  describe("when calling function clear", () => {
+    it("should clear the queue", () => {
+      queue.add("joao");
+      queue.add("alexia");
+      expect(queue.getGuestList()).to.have.length(2);
+      queue.clear();
+      expect(queue.getGuestList()).to.have.length(0);
+    });
+  });
   describe("when calling function whosNext", () => {
-    beforeEach(() => {
+    it("should return next person in line, and always repeat", () => {
       queue.add("joao");
       queue.add("daniel");
       queue.add("alexia");
-    });
-    it("should return next person in line, and always repeat", () => {
       expect(queue.whosNext()).to.be.equal("joao");
       expect(queue.whosNext()).to.be.equal("daniel");
       expect(queue.whosNext()).to.be.equal("alexia");
