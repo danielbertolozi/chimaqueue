@@ -1,0 +1,11 @@
+# Chimaqueue
+
+Using:
+
+* openode
+* slack-payload
+* fastify
+
+### Commands
+
+`openode deploy`: Deploys to the net
