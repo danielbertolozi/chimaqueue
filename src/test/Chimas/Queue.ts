@@ -1,4 +1,4 @@
-import Queue from "../../main/Chimas/Queue";
+import Queue from "../../main/chimas/Queue";
 import { expect } from "chai";
 
 let queue: Queue;
