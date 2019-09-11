@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"tsc": "./node_modules/.bin/tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openode": "^2.0.14"
+    "openode": "^2.0.14",
+    "typescript": "^3.6.3"
   }
 }
