@@ -33,4 +33,19 @@ context("Queue", () => {
       expect(() => queue.remove("joao")).to.throw();
     });
   });
+  describe("when calling function whosNext", () => {
+    beforeEach(() => {
+      queue.add("joao");
+      queue.add("daniel");
+      queue.add("alexia");
+    });
+    it("should return next person in line, and always repeat", () => {
+      expect(queue.whosNext()).to.be.equal("joao");
+      expect(queue.whosNext()).to.be.equal("daniel");
+      expect(queue.whosNext()).to.be.equal("alexia");
+      expect(queue.whosNext()).to.be.equal("joao");
+      expect(queue.whosNext()).to.be.equal("daniel");
+      expect(queue.whosNext()).to.be.equal("alexia");
+    });
+  });
 });
