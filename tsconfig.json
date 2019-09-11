@@ -7,7 +7,7 @@
     "declaration": false,
     "noImplicitAny": false,
     "outDir": "built",
-	"rootDir": "./src"
+    "rootDir": "./src"
   },
   "exclude": [
     "built",
