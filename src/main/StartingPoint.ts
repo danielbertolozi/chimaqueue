@@ -24,7 +24,7 @@ server.post("/new", async (req, reply) => {
   reply.send({ text: `Queue started for channel ${name}`});
 });
 
-server.get("/join", async (req, reply) => {
+server.post("/join", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_id;
   const user = payload.user_id;
@@ -38,7 +38,7 @@ server.get("/join", async (req, reply) => {
   reply.send(`${name} has joined the queue!`);
 });
 
-server.get("/leave", async (req, reply) => {
+server.post("/leave", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_id;
   const user = payload.user_id;
@@ -52,7 +52,7 @@ server.get("/leave", async (req, reply) => {
   reply.send(`User ${user} has left the queue.`);
 });
 
-server.get("/next", async (req, reply) => {
+server.post("/next", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_id;
   let next: string = "";
@@ -66,7 +66,7 @@ server.get("/next", async (req, reply) => {
   reply.send(`The next in queue is ${next}.`);
 });
 
-server.get("/who", async (req, reply) => {
+server.post("/who", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_id;
   let usersInQueue: string;
@@ -80,7 +80,7 @@ server.get("/who", async (req, reply) => {
   reply.send(`The following users are in this queue: ${usersInQueue}.`);
 });
 
-server.get("/clear", async (req, reply) => {
+server.post("/clear", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_id;
   try {
