@@ -10,4 +10,7 @@ export default class Queue {
 	public remove(name: string) {
 		this.guests = this.guests.filter((guest) => guest !== name);
 	}
+	public getGuestList() {
+		return this.guests;
+	}
 };
