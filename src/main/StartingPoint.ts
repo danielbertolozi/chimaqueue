@@ -3,7 +3,10 @@ import * as Payload from "slack-payload";
 import { AddressInfo } from "net";
 import QueueHolder from "./Chimas/QueueHolder";
 import { SlackPayload } from "../LocalDefinitions";
+import * as fastifyFormBody from "fastify-formbody";
 const server = Fastify({ logger: true });
+
+server.register(fastifyFormBody);
 
 const queues = new QueueHolder();
 
