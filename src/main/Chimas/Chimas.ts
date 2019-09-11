@@ -53,7 +53,7 @@ export default class Chimas {
   private leave(channelName: string, userName: string): string {
     let message: string;
     try {
-      this.queues.get(name).remove(userName);
+      this.queues.get(channelName).remove(userName);
       message = `User <@${userName}> has left the queue.`;
     } catch (e) {
       message = e.message;
