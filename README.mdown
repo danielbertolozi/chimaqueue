@@ -1,25 +1,29 @@
 # Chimaqueue
 
-A Slack-Bot in Typescript to manage chimarrão queue.
+A Slack-Bot in Typescript to manage chimarrão queue, made using Fastify, ready to be deployed in Openode.
 
 ## Commands
 
 |---------|---------|
-| Command | 
+| Command | What?   |
+|---------|---------|
+| `new` | Starts a queue in the actual channel. |
+| `join` | Enters a queue from the actual channel. |
+| `leave` | Leaves a queue from the actual channel. |
+| `next` | See who's next in line (this is where you pass the cuia around). |
+| `who` | See who's in this queue. |
+| `clear` | Clears the queue. |
+|---------|-------------------|
 
+## Development
 
+### Available Commands:
 
-Using:
-
-* openode
-* slack-payload
-* fastify
-
-### Commands
-
-`openode deploy`: Deploys to the net
+`yarn deploy`: Builds and deploy to openode
+`yarn tsc`: Build
+`yarn start`: Loads up the server locally
+`yarn test`: Runs the unit tests using mocha
 
 ### Todos
 
-* Make it receive requests in a single end-point, and handle them using text.
-> E.g. instead of using `/join`, use `/chimas join`, for example
+> Cover `Chimas.ts` in tests (is more of an integration in that sense)
