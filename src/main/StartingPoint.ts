@@ -11,92 +11,85 @@ server.register(fastifyFormBody);
 const queues = new QueueHolder();
 
 server.post("/new", async (req, reply) => {
+  let message: string;
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_name;
   try {
     queues.create(name);
-    reply.code(200);
+    message = `Queue started for channel ${name}`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.type("application/json");
-  reply.send({ text: `Queue started for channel ${name}`});
+  reply.send(message);
 });
 
 server.post("/join", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
+  let message;
   const name = payload.channel_name;
   const user = payload.user_name;
   try {
     queues.get(name).add(user);
-    reply.code(200);
+    message = `${user} has joined the queue!`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.send(`${user} has joined the queue!`);
+  reply.send(message);
 });
 
 server.post("/leave", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_name;
   const user = payload.user_name;
+  let message: string;
   try {
     queues.get(name).remove(user);
-    reply.code(200);
+    message = `User ${user} has left the queue.`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.send(`User ${user} has left the queue.`);
+  reply.send(message);
 });
 
 server.post("/next", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_name;
   let next: string = "";
+  let message: string;
   try {
     next = queues.get(name).whosNext();
-    reply.code(200);
+    message = `The next in queue is ${next}.`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.send(`The next in queue is ${next}.`);
+  reply.send(message);
 });
 
 server.post("/who", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_name;
   let usersInQueue: string;
+  let message: string;
   try {
     usersInQueue = queues.get(name).getGuestList().join(", ");
-    reply.code(200);
+    message = `The following users are in this queue: ${usersInQueue}.`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.send(`The following users are in this queue: ${usersInQueue}.`);
+  reply.send(message);
 });
 
 server.post("/clear", async (req, reply) => {
   const payload = new Payload(req.body) as SlackPayload;
   const name = payload.channel_name;
+  let message: string;
   try {
     queues.get(name).clear();
-    reply.code(200);
+    message = `The queue has been cleared!`;
   } catch (e) {
-    server.log.error(e);
-    reply.code(200);
-    reply.send(e.message);
+    message = e.message;
   }
-  reply.send(`The queue has been cleared!`);
+  reply.send(message);
 });
 
 server.post("/test", async (req, reply) => {
@@ -115,7 +108,6 @@ const start = async () => {
     const realPort = (server.server.address() as AddressInfo).port;
     server.log.info(`server listening on ${realPort}`);
   } catch (err) {
-    server.log.error(err);
     process.exit(1);
   }
 }
