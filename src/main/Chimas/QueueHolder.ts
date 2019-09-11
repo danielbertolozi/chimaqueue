@@ -17,7 +17,7 @@ export default class QueueHolder {
   public get(name: string) {
     const queue = this.findQueue(name);
     if (!queue) {
-      throw new Error("Queue does not exists");
+      throw new Error("Queue does not exist. Use /new to start a new queue.");
     }
     return queue;
   }
