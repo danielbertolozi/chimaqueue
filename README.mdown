@@ -26,3 +26,6 @@ A Slack-Bot in Typescript to manage chimarrão queue, made using Fastify, ready 
 ### Todos
 
 > Cover `Chimas.ts` in tests (is more of an integration in that sense)
+> Add missing documentation
+
+**For more pending features, refer to Issues.**
