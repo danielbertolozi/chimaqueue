@@ -20,7 +20,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "fastify": "^2.8.0",
+    "fastify": "^2.15.1",
     "fastify-formbody": "^3.1.0",
     "openode": "^2.0.14",
     "slack-payload": "^1.0.11"
